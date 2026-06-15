@@ -5,9 +5,8 @@ echo === 一键整理桌面 ===
 echo 即将把桌面文件按类型自动分类
 echo.
 
-:: 获取桌面路径
-set "DESKTOP=%USERPROFILE%\Desktop"
-if not exist "%DESKTOP%" set "DESKTOP=%USERPROFILE%\桌面"
+:: 获取桌面真实位置（自动适配 D 盘等情况）
+for /f "delims=" %%d in ('powershell -NoProfile -Command "[Environment]::GetFolderPath('Desktop')"') do set "DESKTOP=%%d"
 
 echo 桌面路径：%DESKTOP%
 echo.
